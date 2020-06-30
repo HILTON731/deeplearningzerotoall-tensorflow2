@@ -70,3 +70,44 @@ Normalization = (data - np.min(data, 0)) / (np.max(data, 0) - np.min(data, 0))
 - 이상치 값들(평균적인 데이터와 비교해 튀는 값)
 <br>보통 전처리시 지워줌
 <p> NLP나 Image 처리에서도 이상치 값을 지워주는 전처리과정이 필요함
+
+### Overfitting & underfitting
+
+1. 학습이 반복될수록 hypothesis에 맞춰져가면서 accuracy가 높아져감
+2. 실제 모델에 비교하면서 validation(평가)를 수행
+- 위 경우 사용한 데이터에 의해서만 학습이 진행되기 때문에 학습데이터에만 맞게 모델의 학습이 진행되거나 데이터를 거의 반영하지 않을 수 있음
+- Test과정에서는 Accuracy가 보장되지 않을 수 있음
+
+#### overfitting(High variance)
+
+- 과적합이라고도 불림
+- Train data에 심하게 의존하여 Test data에서는 학습된 모델이 좋은 성능을 보이지 못하는 경우
+
+
+#### underfitting
+
+- 과소적합
+- 데이터를 너무 반영하지 않아 학습이 덜되어 평균적인 성능조차 보이지 못하는 경우
+
+### Set a features
+Overfitting 해결책
+
+1. Get more training data: 더 많은 데이터를 통해 많은 변화량을 통해 overfitting 방지
+2. Smaller set of features: 차원을 줄여 데이터들의 분포에따른 차이를 줄이는 것으로 의미를 분명화 ex) PCA
+```py
+from sklearn.decomposition import PCA
+pca = decomposition.PCA(n_components=3)
+pca.fit(X)
+X = pca.transform(X)
+```
+3. Add additional features: 너무 단순한 모델의 의미를 구체화하여 데이터 구분의 기준을 증가시킴 (Underfitting에서의 해결책)
+
+### Regularization(Add term to loss)
+
+- Loss 값에 term(lambda)을 주는 것으로 해결
+- Term(lambda)를 통한 모델의 평균값을 더하는 것으로 모델 값 정규화
+```py
+L2_loss = tf.nn.l2_loss(w)
+# output = sum(t ** 2) / 2
+```
+
