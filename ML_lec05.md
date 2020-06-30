@@ -23,7 +23,7 @@
 ## Cost Function
 - Weight를 최적의 파라미터로 만들어주는 함수
 - 실제 원하는 모델의 값과 실제 값과의 차이를 줄이는 것으로 원하는 모델 값을 만들어내는 것
-```
+```py
 def loss_fn(hypothesis, labels):
     cost = -tf.reduce_mean(labels * tf.log(hypothesis) + (1 - labels) * tf.log(1 - hypothesis))
     return cost
@@ -35,7 +35,7 @@ def loss_fn(hypothesis, labels):
 
  - Cost function을 반복하여 0에 가장 가까운 값을 구하는 것
  - tensorflow v2.0에서는 eager mode 지원
- ```
+ ```py
  def grad(hypothesis, labels):
     with tf.GradientTape() as tape:
         loss_value = loss_fn(hypothesis, labels)
