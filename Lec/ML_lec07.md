@@ -111,3 +111,38 @@ L2_loss = tf.nn.l2_loss(w)
 # output = sum(t ** 2) / 2
 ```
 
+### Data sets
+: 학습을 위한 데이터와 평가를 위한 데이터를 통해 모델 생성
+- Train data vs Test data: 학습 데이터, 평가 데이터 구분
+```py
+mnist = tf.keras.datasets.mnist
+(x_train, y_train), (x_test, y_test) = mnist.load_data() # training and testing images
+model.fit(x_train,y_train, validation_splitt=0.2, epochs=5) # 20% Val data
+```
+- Evaludating a hypothesis: 완전히 새로운 데이터를 통해 모델 평가
+```py
+test_acc = accuracy_fn(softmax_fn(x_test), y_test) # define hypothesis and test
+model.evaluate(x_test, y_test) # keras
+```
+
+- Anomaly detection: GAN을 통해 이상 값 탐지<br>
+<a href=https://arxiv.org/pdf/1703.05921.pdf>Unsupervised Anomaly Detection with Generative Adversarial Networks to Guide Marker Discovery</a>
+
+### Online vs Batch
+
+- Online learning: 데이터가 인터넷에 연결된 상태에서 지속적으로 학습하면서 모델이 변함
+
+- Batch learning: 데이터가 정적인 상태에서 학습을 하는 모델
+
+### Fine Tuning / Feature Extraction
+
+- Fine Tuning: 모델 내 weight값이나 일부 계수들을 조작하여 새로운 데이터에 대한 구분도 가능하게 하는 것
+- Feature Extraction: 기존 모델에서 새로운 Task(data)에 대해서만 학습을 시켜 기존 모델에서 새로운 데이터에 대한 구분 가능
+
+```py
+saver = tf.train.import_meta_graph('my-model-1000.meta')
+saver.restore(tf.train.latest_checkpoint('./'))
+```
+
+### Efficient Model
+모델의 속도 또한 매우 중요
