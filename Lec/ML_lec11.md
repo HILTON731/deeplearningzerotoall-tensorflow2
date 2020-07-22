@@ -100,3 +100,8 @@ RNN을 통해 token을 읽어서 나온 최종 값과 실제 값을 비교해 ba
 Input에 가까운 hidden layer는 syntactic information을 더 잘 파악하고<br>
 Output에 가까운 hidden layer는 semantic information을 더 잘 파악하는 경향이 있음
 
+
+## Sequence to Sequence
+
+- Sequence data를 입력받아 Sequence를 출력하는 것
+- 번역, 챗봇 등이 있음
